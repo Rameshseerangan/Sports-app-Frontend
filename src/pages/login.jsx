@@ -10,17 +10,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/login', { email, password });
+      const response = await axios.post('https://sports-app-backend-a5bh.onrender.com/api/auth/login', { email, password });
       const { role, token, message } = response.data;
 
-      // Store token for authenticated requests
+      // Store token and role for authenticated requests
       localStorage.setItem('authToken', token);
+      localStorage.setItem('role', role);
 
       // Navigate based on role
       if (role === 'admin') {
         navigate('/admin'); // Redirect to admin dashboard
       } else {
-        navigate('/'); // Redirect to home page for regular users
+        navigate('/'); // Redirect to home page
       }
 
       alert(message || 'Login successful!');
@@ -31,10 +32,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-500 to-blue-700">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-500 to-blue-700 font-poppins">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-md"
+        className="bg-white/70 p-8 rounded-lg shadow-lg w-11/12 max-w-md"
       >
         <h1 className="text-2xl font-extrabold text-blue-700 mb-6 text-center">
           Login to Your Account

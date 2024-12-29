@@ -3,20 +3,20 @@ import axios from 'axios';
 
 const AdminDashboard = () => {
   const [post, setPost] = useState({
-    sportName: '',
-    feature: '',
-    rules: '',
-    physicalHealth: '',
-    mentalHealth: '',
-    scholarship_12th: '', // New field
-    scholarship_college: '', // New field
+    sports: '',
+    Feature: '',
+    Ruls: '',
+    physical_helth: '',
+    mental_helth: '',
+    scholarship_12th: '',
+    scholarship_collage: '',
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('authToken'); // Include token if needed
-      const response = await axios.post('http://localhost:4000/api/post/create', post, {
+      const response = await axios.post('https://sports-app-backend-a5bh.onrender.com/api/post/create', post, {
         headers: { Authorization: `Bearer ${token}` }, // Add headers if required
       });
       alert(response.data.message);
@@ -27,50 +27,50 @@ const AdminDashboard = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-3/4 max-w-md mx-auto mt-10">
+    <form onSubmit={handleSubmit} className="w-11/12 max-w-2xl mx-auto mt-10 bg-white/70 p-8 rounded-lg shadow-2xl font-poppins">
+      <h1 className="text-3xl font-extrabold text-blue-900 uppercase tracking-wide mb-6 text-center">Create New Post</h1>
       <input
         type="text"
         placeholder="Sport Name"
-        className="border p-2 w-full mb-4"
-        onChange={(e) => setPost({ ...post, sportName: e.target.value })}
+        className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+        onChange={(e) => setPost({ ...post, sports: e.target.value })}
       />
       <input
         type="text"
         placeholder="Feature"
-        className="border p-2 w-full mb-4"
-        onChange={(e) => setPost({ ...post, feature: e.target.value })}
+        className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+        onChange={(e) => setPost({ ...post, Feature: e.target.value })}
       />
       <textarea
         placeholder="Rules"
-        className="border p-2 w-full mb-4"
-        onChange={(e) => setPost({ ...post, rules: e.target.value })}
+        className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+        onChange={(e) => setPost({ ...post, Ruls: e.target.value })}
       ></textarea>
       <textarea
         placeholder="Physical Health"
-        className="border p-2 w-full mb-4"
-        onChange={(e) => setPost({ ...post, physicalHealth: e.target.value })}
+        className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+        onChange={(e) => setPost({ ...post, physical_helth: e.target.value })}
       ></textarea>
       <textarea
         placeholder="Mental Health"
-        className="border p-2 w-full mb-4"
-        onChange={(e) => setPost({ ...post, mentalHealth: e.target.value })}
+        className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+        onChange={(e) => setPost({ ...post, mental_helth: e.target.value })}
       ></textarea>
-      {/* New input fields */}
       <input
         type="text"
         placeholder="Scholarship for 12th"
-        className="border p-2 w-full mb-4"
+        className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
         onChange={(e) => setPost({ ...post, scholarship_12th: e.target.value })}
       />
       <input
         type="text"
         placeholder="Scholarship for College"
-        className="border p-2 w-full mb-4"
-        onChange={(e) => setPost({ ...post, scholarship_college: e.target.value })}
+        className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+        onChange={(e) => setPost({ ...post, scholarship_collage: e.target.value })}
       />
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+        className="bg-gradient-to-r from-green-500 to-blue-700 text-white py-3 rounded-lg w-full text-lg font-bold hover:shadow-lg transition duration-300"
       >
         Create Post
       </button>

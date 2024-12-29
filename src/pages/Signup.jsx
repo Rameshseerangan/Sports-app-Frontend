@@ -9,7 +9,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/register', formData);
+      const response = await axios.post('https://sports-app-backend-a5bh.onrender.com/api/auth/register', formData);
       alert(response.data.message);
       navigate("/login");
     } catch (error) {
@@ -18,10 +18,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-[url(/src/assets/sportsbg.webp)] bg-cover bg-center flex items-center justify-center">
+    <div className="h-screen w-full bg-[url(/src/assets/sportsbg.webp)] bg-cover bg-center flex items-center justify-center font-poppins">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-2xl w-11/12 max-w-lg flex flex-col items-center space-y-6"
+        className="bg-white/50 p-8 rounded-lg shadow-2xl w-11/12 max-w-lg flex flex-col items-center space-y-6"
       >
         <h1 className="text-3xl font-extrabold text-blue-700">Create Your Account</h1>
         <input

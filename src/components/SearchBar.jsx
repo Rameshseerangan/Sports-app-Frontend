@@ -12,18 +12,19 @@ const SearchBar = () => {
       alert('Please select a sport and user type.');
       return;
     }
+    // Navigate to the search results page with selected sport and user type as query parameters
     navigate(`/search-results?sportName=${selectedSport}&userType=${userType}`);
   };
 
   const sports = ['Volleyball', 'Badminton', 'Cricket', 'Chess', 'Football'];
 
   return (
-    <div className="h-screen w-full bg-[url(/src/assets/sportsbg.webp)] bg-cover bg-center flex items-center justify-center">
+    <div className="h-screen w-full bg-[url(/src/assets/sportsbg1.webp)] bg-cover bg-center flex items-center justify-center">
       <form
         onSubmit={handleSearch}
-        className="bg-white/90 p-8 rounded-lg shadow-2xl w-11/12 max-w-2xl flex flex-col items-center space-y-6 border-t-4 border-yellow-400"
+        className="bg-white/70 p-8 rounded-lg shadow-2xl w-11/12 max-w-2xl flex flex-col items-center space-y-6 border-t-4 border-yellow-400 font-poppins"
       >
-        <h1 className="text-4xl font-extrabold text-blue-900 uppercase tracking-wide">
+        <h1 className="text-4xl font-extrabold text-blue-900 uppercase tracking-wide text-center md:text-5xl">
           Explore Your Favorite Sports
         </h1>
         <div className="w-full">
