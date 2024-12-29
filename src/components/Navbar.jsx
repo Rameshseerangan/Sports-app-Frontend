@@ -8,7 +8,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex items-center text-2xl font-extrabold tracking-widest uppercase">
         <img 
-          src="/src/assets/logo.webp" 
+          src="/src/assets/5e252a4f-d0bf-4f16-b338-c9fa77cd5216.webp" 
           alt="" 
           className="h-10 w-8 mr-2" 
         />
