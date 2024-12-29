@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="flex items-center text-2xl font-extrabold tracking-widest uppercase">
         <img 
           src="/src/assets/logo.webp" 
-          alt="Shine Sports Logo" 
+          alt="" 
           className="h-10 w-8 mr-2" 
         />
         Shine <span className="text-yellow-400 ml-1 ">Sports</span>
