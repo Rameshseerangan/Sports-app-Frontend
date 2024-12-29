@@ -19,16 +19,16 @@ const SearchBar = () => {
   const sports = ['Volleyball', 'Badminton', 'Cricket', 'Chess', 'Football'];
 
   return (
-    <div className="h-screen w-full bg-[url(/src/assets/sportsbg1.webp)] bg-cover bg-center flex items-center justify-center">
+    <div className="h-screen w-full bg-[url(/src/assets/sportsbg2.webp)] bg-cover bg-center flex items-center justify-center">
       <form
         onSubmit={handleSearch}
-        className="bg-white/70 p-8 rounded-lg shadow-2xl w-11/12 max-w-2xl flex flex-col items-center space-y-6 border-t-4 border-yellow-400 font-poppins"
+        className="bg-white/50 p-8 rounded-lg shadow-2xl w-11/12 max-w-2xl flex flex-col items-center space-y-6 border-t-4 border-yellow-400 font-poppins"
       >
         <h1 className="text-4xl font-extrabold text-blue-900 uppercase tracking-wide text-center md:text-5xl">
           Explore Your Favorite Sports
         </h1>
         <div className="w-full">
-          <label className="block text-lg font-semibold text-gray-700 mb-2">
+          <label className="block text-lg font-bold text-gray-900 mb-2">
             Select a Sport
           </label>
           <select
@@ -47,7 +47,7 @@ const SearchBar = () => {
           </select>
         </div>
         <div className="w-full">
-          <label className="block text-lg font-semibold text-gray-700 mb-2">
+          <label className="block text-lg font-bold text-gray-900 mb-2">
             You are a:
           </label>
           <div className="flex space-x-4">
@@ -60,7 +60,7 @@ const SearchBar = () => {
                 onChange={(e) => setUserType(e.target.value)}
                 className="h-5 w-5 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-lg">Student</span>
+              <span className="text-lg font-bold">Student</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -71,7 +71,7 @@ const SearchBar = () => {
                 onChange={(e) => setUserType(e.target.value)}
                 className="h-5 w-5 text-blue-600 focus:ring-blue-500"
               />
-              <span className="text-lg">Faculty</span>
+              <span className="text-lg font-bold">Exports</span>
             </label>
           </div>
         </div>

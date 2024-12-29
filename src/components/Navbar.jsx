@@ -29,19 +29,20 @@ const Navbar = () => {
           <span>Contact</span>
         </Link>
         <Link
-          to="/login"
-          className="flex items-center font-poppins space-x-2 bg-yellow-400 text-blue-900 py-2 px-5 rounded-full hover:bg-yellow-500 transition duration-200 shadow-md"
-        >
-          <FaSignInAlt />
-          <span>Login</span>
-        </Link>
-        <Link
           to="/Signup"
           className="flex items-center font-poppins space-x-2 bg-yellow-400 text-blue-900 py-2 px-5 rounded-full hover:bg-yellow-500 transition duration-200 shadow-md"
         >
           <FaSignInAlt />
           <span>Signup</span>
         </Link>
+        <Link
+          to="/login"
+          className="flex items-center font-poppins space-x-2 bg-yellow-400 text-blue-900 py-2 px-5 rounded-full hover:bg-yellow-500 transition duration-200 shadow-md"
+        >
+          <FaSignInAlt />
+          <span>Login</span>
+        </Link>
+        
       </div>
     </nav>
   );
