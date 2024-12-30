@@ -28,7 +28,7 @@ const SearchResults = () => {
       ? result.Feature.map((item, index) => (
           <div key={index} className="mb-4">
             <h3 className="text-xl font-bold text-blue-900">{item.subheading}</h3>
-            <p className="text-md text-gray-900">{item.content}</p>
+            <p className="text-md text-black">{item.content}</p>
           </div>
         ))
       : 'Details not available.',
@@ -36,7 +36,7 @@ const SearchResults = () => {
       ? result.Ruls.map((item, index) => (
           <div key={index} className="mb-4">
             <h3 className="text-xl font-bold text-blue-900">{item.subheading}</h3>
-            <p className="text-md text-gray-900">{item.content}</p>
+            <p className="text-md text-black">{item.content}</p>
           </div>
         ))
       : 'Details not available.',
@@ -44,7 +44,7 @@ const SearchResults = () => {
       ? result.physical_helth.map((item, index) => (
           <div key={index} className="mb-4">
             <h3 className="text-xl font-bold text-blue-700">{item.subheading}</h3>
-            <p className="text-md text-gray-700">{item.content}</p>
+            <p className="text-md text-black">{item.content}</p>
           </div>
         ))
       : 'Details not available.',
@@ -52,7 +52,7 @@ const SearchResults = () => {
       ? result.mental_helth.map((item, index) => (
           <div key={index} className="mb-4">
             <h3 className="text-xl font-bold text-blue-700">{item.subheading}</h3>
-            <p className="text-md text-gray-700">{item.content}</p>
+            <p className="text-md text-black">{item.content}</p>
           </div>
         ))
       : 'Details not available.',
@@ -60,7 +60,7 @@ const SearchResults = () => {
       ? result.scholarship_12th.map((item, index) => (
           <div key={index} className="mb-4">
             <h3 className="text-xl font-bold text-blue-700">{item.subheading}</h3>
-            <p className="text-md text-gray-700">{item.content}</p>
+            <p className="text-md text-black">{item.content}</p>
           </div>
         ))
       : 'Details not available.',
@@ -68,7 +68,7 @@ const SearchResults = () => {
       ? result.scholarship_collage.map((item, index) => (
           <div key={index} className="mb-4">
             <h3 className="text-xl font-bold text-blue-700">{item.subheading}</h3>
-            <p className="text-md text-gray-700">{item.content}</p>
+            <p className="text-md text-black">{item.content}</p>
           </div>
         ))
       : 'Details not available.',
@@ -77,7 +77,7 @@ const SearchResults = () => {
   return (
     <div className="min-h-screen bg-[url(/src/assets/sportsbg1.webp)] from-green-400 via-blue-500 to-indigo-600 text-white flex font-poppins">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white/50 text-blue-900 p-8 shadow-lg rounded-l-xl">
+      <div className="w-1/4 bg-white/70 text-blue-900 p-8 shadow-lg rounded-l-xl">
         <h2 className="text-3xl font-extrabold mb-8 text-center">Sections</h2>
         <ul className="space-y-6">
           {Object.keys(sections).map((section) => (
@@ -103,7 +103,7 @@ const SearchResults = () => {
         </h1>
         <div className="space-y-8">
           {sections[activeSection] && (
-            <div className="bg-white/70 text-blue-950 p-8 rounded-lg shadow-xl hover:scale-105 transition-all duration-300">
+            <div className="bg-white/90 text-blue-950 p-8 rounded-lg shadow-xl hover:scale-105 transition-all duration-300">
               <h2 className="text-2xl font-semibold mb-4 text-blue-700">{activeSection}</h2>
               <div className="text-lg">{sections[activeSection]}</div>
             </div>

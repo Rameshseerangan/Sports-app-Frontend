@@ -1,46 +1,46 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const AdminDashboard = () => {
   const [post, setPost] = useState({
-    sports: '',
-    roadmapImg: '', // Add roadmap image field
+    sports: "",
+    roadmapImg: "",
     Feature: [
-      { subheading: 'Professional Player', content: '' },
-      { subheading: 'Coach/Trainer', content: '' },
-      { subheading: 'Sports Analyst/Commentator', content: '' },
-      { subheading: 'Umpire/Match Official', content: '' },
-      { subheading: 'Fitness Trainer', content: '' },
-      { subheading: 'Administrator/Manager', content: '' },
-      { subheading: 'Success Stories', content: '' },
-      { subheading: 'Earnings and Growth', content: '' },
+      { subheading: "Professional Player", content: "" },
+      { subheading: "Coach/Trainer", content: "" },
+      { subheading: "Sports Analyst/Commentator", content: "" },
+      { subheading: "Umpire/Match Official", content: "" },
+      { subheading: "Fitness Trainer", content: "" },
+      { subheading: "Administrator/Manager", content: "" },
+      { subheading: "Success Stories", content: "" },
+      { subheading: "Earnings and Growth", content: "" },
     ],
     Ruls: [
-      { subheading: 'Warm-Up', content: '' },
-      { subheading: 'Technical Skills', content: '' },
-      { subheading: 'Tactical Training', content: '' },
-      { subheading: 'Physical Conditioning', content: '' },
-      { subheading: 'Nutrition Plan', content: '' },
+      { subheading: "Warm-Up", content: "" },
+      { subheading: "Technical Skills", content: "" },
+      { subheading: "Tactical Training", content: "" },
+      { subheading: "Physical Conditioning", content: "" },
+      { subheading: "Nutrition Plan", content: "" },
     ],
-    physical_helth: [
-      { subheading: 'Fitness Requirements', content: '' },
-      { subheading: 'Recommended Exercises', content: '' },
+    physical_strength: [
+      { subheading: "Fitness Requirements", content: "" },
+      { subheading: "Recommended Exercises", content: "" },
     ],
-    mental_helth: [
-      { subheading: 'Health Standards', content: '' },
-      { subheading: 'Preventive Measures', content: '' },
-      { subheading: 'Common Injuries', content: '' },
+    mental_strength: [
+      { subheading: "Health Standards", content: "" },
+      { subheading: "Preventive Measures", content: "" },
+      { subheading: "Common Injuries", content: "" },
     ],
     scholarship_12th: [
-      { subheading: 'Achievements', content: '' },
-      { subheading: 'Academic Standards', content: '' },
-      { subheading: 'Documentation', content: '' },
+      { subheading: "Achievements", content: "" },
+      { subheading: "Academic Standards", content: "" },
+      { subheading: "Documentation", content: "" },
     ],
     scholarship_collage: [
-      { subheading: 'Sports Achievements', content: '' },
-      { subheading: 'Academic Criteria', content: '' },
-      { subheading: 'Selection Process', content: '' },
-      { subheading: 'Bonus Points', content: '' },
+      { subheading: "Sports Achievements", content: "" },
+      { subheading: "Academic Criteria", content: "" },
+      { subheading: "Selection Process", content: "" },
+      { subheading: "Bonus Points", content: "" },
     ],
   });
 
@@ -49,21 +49,21 @@ const AdminDashboard = () => {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append("image", file);
 
     try {
       const response = await axios.post(
-        'https://sports-app-backend-a5bh.onrender.com/api/post/create', // Replace with your backend's image upload endpoint
+        "http://localhost:4000/api/upload", // Backend image upload endpoint
         formData,
         {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      setPost({ ...post, roadmapImg: response.data.imageUrl }); // Save the uploaded image URL
-      alert('Image uploaded successfully!');
+      setPost({ ...post, roadmapImg: response.data.imageUrl });
+      alert("Image uploaded successfully!");
     } catch (error) {
-      console.error('Error uploading image:', error.response?.data || error.message);
-      alert('Failed to upload image');
+      console.error("Error uploading image:", error.response?.data || error.message);
+      alert("Failed to upload image");
     }
   };
 
@@ -79,14 +79,18 @@ const AdminDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('authToken');
-      const response = await axios.post('https://sports-app-backend-a5bh.onrender.com/api/post/create', post, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      alert(response.data.message);
+      const token = localStorage.getItem("authToken");
+      const response = await axios.post(
+        "https://sports-app-backend-a5bh.onrender.com/api/post/create",
+        post,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      alert(response.data.message || "Post created successfully!");
     } catch (error) {
-      console.error('Error:', error.response?.data || error.message);
-      alert(error.response?.data?.message || 'Failed to create post');
+      console.error("Error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Failed to create post");
     }
   };
 
@@ -100,13 +104,13 @@ const AdminDashboard = () => {
             placeholder={`Subheading - ${item.subheading}`}
             className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 mb-2"
             value={item.subheading}
-            onChange={(e) => handleChange(sectionName, index, 'subheading', e.target.value)}
+            onChange={(e) => handleChange(sectionName, index, "subheading", e.target.value)}
           />
           <textarea
             placeholder="Content"
             className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
             value={item.content}
-            onChange={(e) => handleChange(sectionName, index, 'content', e.target.value)}
+            onChange={(e) => handleChange(sectionName, index, "content", e.target.value)}
           />
         </div>
       ))}
@@ -114,8 +118,13 @@ const AdminDashboard = () => {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="w-11/12 max-w-4xl mx-auto mt-10 bg-white/70 p-8 rounded-lg shadow-2xl font-poppins">
-      <h1 className="text-3xl font-extrabold text-blue-900 uppercase tracking-wide mb-6 text-center">Create New Post</h1>
+    <form
+      onSubmit={handleSubmit}
+      className="w-11/12 max-w-4xl mx-auto mt-10 bg-white/70 p-8 rounded-lg shadow-2xl font-poppins"
+    >
+      <h1 className="text-3xl font-extrabold text-blue-900 uppercase tracking-wide mb-6 text-center">
+        Create New Post
+      </h1>
 
       <input
         type="text"
@@ -143,12 +152,12 @@ const AdminDashboard = () => {
         )}
       </div>
 
-      {renderSection('Feature', post.Feature)}
-      {renderSection('Ruls', post.Ruls)}
-      {renderSection('physical_helth', post.physical_helth)}
-      {renderSection('mental_helth', post.mental_helth)}
-      {renderSection('scholarship_12th', post.scholarship_12th)}
-      {renderSection('scholarship_collage', post.scholarship_collage)}
+      {renderSection("Feature", post.Feature)}
+      {renderSection("Ruls", post.Ruls)}
+      {renderSection("physical_strength", post.physical_strength)}
+      {renderSection("mental_strength", post.mental_strength)}
+      {renderSection("scholarship_12th", post.scholarship_12th)}
+      {renderSection("scholarship_collage", post.scholarship_collage)}
 
       <button
         type="submit"
