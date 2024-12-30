@@ -11,7 +11,7 @@ const SearchResults = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/post/sports/search?sportName=${query}`);
+        const response = await axios.get(`https://sports-app-backend-a5bh.onrender.com/api/post/sports/search?sportName=${query}`);
         setResult(response.data.data[0]); // Assuming response contains 'data' as an array
       } catch (error) {
         alert('Failed to fetch search results');

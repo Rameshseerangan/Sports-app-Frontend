@@ -4,52 +4,75 @@ import axios from 'axios';
 const AdminDashboard = () => {
   const [post, setPost] = useState({
     sports: '',
-    feature: {
-      professionalPlayer: '',
-      coachTrainer: '',
-      sportsAnalyst: '',
-      umpire: '',
-      fitnessTrainer: '',
-      administratorManager: '',
-      successStories: '',
-      earningsAndGrowth: '',
-    },
-    sportsRegimens: {
-      warmUp: '',
-      technicalSkills: '',
-      tacticalTraining: '',
-      physicalConditioning: '',
-      nutritionPlan: '',
-    },
-    physicalFitness: {
-      fitnessRequirements: '',
-      recommendedExercises: '',
-    },
-    medicalFitness: {
-      healthStandards: '',
-      preventiveMeasures: '',
-      commonInjuries: '',
-    },
-    scholarship12th: {
-      achievements: '',
-      academicStandards: '',
-      documentation: '',
-    },
-    scholarshipCollege: {
-      sportsAchievements: '',
-      academicCriteria: '',
-      selectionProcess: '',
-      bonusPoints: '',
-    },
+    roadmapImg: '', // Add roadmap image field
+    Feature: [
+      { subheading: 'Professional Player', content: '' },
+      { subheading: 'Coach/Trainer', content: '' },
+      { subheading: 'Sports Analyst/Commentator', content: '' },
+      { subheading: 'Umpire/Match Official', content: '' },
+      { subheading: 'Fitness Trainer', content: '' },
+      { subheading: 'Administrator/Manager', content: '' },
+      { subheading: 'Success Stories', content: '' },
+      { subheading: 'Earnings and Growth', content: '' },
+    ],
+    Ruls: [
+      { subheading: 'Warm-Up', content: '' },
+      { subheading: 'Technical Skills', content: '' },
+      { subheading: 'Tactical Training', content: '' },
+      { subheading: 'Physical Conditioning', content: '' },
+      { subheading: 'Nutrition Plan', content: '' },
+    ],
+    physical_helth: [
+      { subheading: 'Fitness Requirements', content: '' },
+      { subheading: 'Recommended Exercises', content: '' },
+    ],
+    mental_helth: [
+      { subheading: 'Health Standards', content: '' },
+      { subheading: 'Preventive Measures', content: '' },
+      { subheading: 'Common Injuries', content: '' },
+    ],
+    scholarship_12th: [
+      { subheading: 'Achievements', content: '' },
+      { subheading: 'Academic Standards', content: '' },
+      { subheading: 'Documentation', content: '' },
+    ],
+    scholarship_collage: [
+      { subheading: 'Sports Achievements', content: '' },
+      { subheading: 'Academic Criteria', content: '' },
+      { subheading: 'Selection Process', content: '' },
+      { subheading: 'Bonus Points', content: '' },
+    ],
   });
 
-  const handleChange = (section, field, value) => {
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await axios.post(
+        'https://sports-app-backend-a5bh.onrender.com/api/post/create', // Replace with your backend's image upload endpoint
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }
+      );
+      setPost({ ...post, roadmapImg: response.data.imageUrl }); // Save the uploaded image URL
+      alert('Image uploaded successfully!');
+    } catch (error) {
+      console.error('Error uploading image:', error.response?.data || error.message);
+      alert('Failed to upload image');
+    }
+  };
+
+  const handleChange = (section, index, field, value) => {
     setPost((prev) => ({
       ...prev,
-      [section]: {
-        ...prev[section],
-        [field]: value,
-      },
+      [section]: prev[section].map((item, i) =>
+        i === index ? { ...item, [field]: value } : item
+      ),
     }));
   };
 
@@ -67,6 +90,29 @@ const AdminDashboard = () => {
     }
   };
 
+  const renderSection = (sectionName, sectionData) => (
+    <div className="mb-6">
+      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">{sectionName}</h2>
+      {sectionData.map((item, index) => (
+        <div key={index} className="mb-4">
+          <input
+            type="text"
+            placeholder={`Subheading - ${item.subheading}`}
+            className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 mb-2"
+            value={item.subheading}
+            onChange={(e) => handleChange(sectionName, index, 'subheading', e.target.value)}
+          />
+          <textarea
+            placeholder="Content"
+            className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+            value={item.content}
+            onChange={(e) => handleChange(sectionName, index, 'content', e.target.value)}
+          />
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <form onSubmit={handleSubmit} className="w-11/12 max-w-4xl mx-auto mt-10 bg-white/70 p-8 rounded-lg shadow-2xl font-poppins">
       <h1 className="text-3xl font-extrabold text-blue-900 uppercase tracking-wide mb-6 text-center">Create New Post</h1>
@@ -75,74 +121,34 @@ const AdminDashboard = () => {
         type="text"
         placeholder="Sport Name"
         className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+        value={post.sports}
         onChange={(e) => setPost({ ...post, sports: e.target.value })}
       />
 
-      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">Feature</h2>
-      {Object.keys(post.feature).map((key) => (
+      {/* Roadmap Image Upload */}
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">Roadmap Image</h2>
         <input
-          key={key}
-          type="text"
-          placeholder={key.replace(/([A-Z])/g, ' $1')}
-          className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
-          onChange={(e) => handleChange('feature', key, e.target.value)}
+          type="file"
+          accept="image/*"
+          className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+          onChange={handleFileChange}
         />
-      ))}
+        {post.roadmapImg && (
+          <img
+            src={post.roadmapImg}
+            alt="Roadmap Preview"
+            className="mt-4 w-full h-64 object-cover rounded-lg"
+          />
+        )}
+      </div>
 
-      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">Sports Regimens</h2>
-      {Object.keys(post.sportsRegimens).map((key) => (
-        <input
-          key={key}
-          type="text"
-          placeholder={key.replace(/([A-Z])/g, ' $1')}
-          className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
-          onChange={(e) => handleChange('sportsRegimens', key, e.target.value)}
-        />
-      ))}
-
-      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">Physical Fitness</h2>
-      {Object.keys(post.physicalFitness).map((key) => (
-        <input
-          key={key}
-          type="text"
-          placeholder={key.replace(/([A-Z])/g, ' $1')}
-          className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
-          onChange={(e) => handleChange('physicalFitness', key, e.target.value)}
-        />
-      ))}
-
-      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">Medical Fitness</h2>
-      {Object.keys(post.medicalFitness).map((key) => (
-        <input
-          key={key}
-          type="text"
-          placeholder={key.replace(/([A-Z])/g, ' $1')}
-          className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
-          onChange={(e) => handleChange('medicalFitness', key, e.target.value)}
-        />
-      ))}
-
-      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">Scholarship for 12th</h2>
-      {Object.keys(post.scholarship12th).map((key) => (
-        <input
-          key={key}
-          type="text"
-          placeholder={key.replace(/([A-Z])/g, ' $1')}
-          className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
-          onChange={(e) => handleChange('scholarship12th', key, e.target.value)}
-        />
-      ))}
-
-      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">Scholarship for College</h2>
-      {Object.keys(post.scholarshipCollege).map((key) => (
-        <input
-          key={key}
-          type="text"
-          placeholder={key.replace(/([A-Z])/g, ' $1')}
-          className="border p-3 w-full mb-4 text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
-          onChange={(e) => handleChange('scholarshipCollege', key, e.target.value)}
-        />
-      ))}
+      {renderSection('Feature', post.Feature)}
+      {renderSection('Ruls', post.Ruls)}
+      {renderSection('physical_helth', post.physical_helth)}
+      {renderSection('mental_helth', post.mental_helth)}
+      {renderSection('scholarship_12th', post.scholarship_12th)}
+      {renderSection('scholarship_collage', post.scholarship_collage)}
 
       <button
         type="submit"

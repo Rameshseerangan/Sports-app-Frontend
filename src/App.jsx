@@ -10,7 +10,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import AdminDashboard from './pages/AdminDashboard';
 import SearchResults from './pages/SearchResults';
-
+import SportsCareer from './pages/Exports';
 const App = () => {
   return (
     <Router>
@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/sports-career" element={<SportsCareer />} />
       </Routes>
     </Router>
   );

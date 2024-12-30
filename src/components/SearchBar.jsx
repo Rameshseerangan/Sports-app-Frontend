@@ -12,8 +12,13 @@ const SearchBar = () => {
       alert('Please select a sport and user type.');
       return;
     }
-    // Navigate to the search results page with selected sport and user type as query parameters
-    navigate(`/search-results?sportName=${selectedSport}&userType=${userType}`);
+    if (userType === 'faculty') {
+      // Navigate to the SportsCareer page
+      navigate('/sports-career');
+    } else {
+      // Navigate to the search results page with selected sport and user type
+      navigate(`/search-results?sportName=${selectedSport}&userType=${userType}`);
+    }
   };
 
   const sports = ['Volleyball', 'Badminton', 'Cricket', 'Chess', 'Football'];
