@@ -9,7 +9,7 @@ const TournamentDetails = () => {
   useEffect(() => {
     const fetchTournament = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/tournament/sportsname/${sports_name}`);
+        const response = await axios.get(`https://sports-app-backend-a5bh.onrender.com/api/tournament/sportsname/${sports_name}`);
         setTournament(response.data.data);
       } catch (error) {
         console.error("Error fetching tournament details:", error.message);
