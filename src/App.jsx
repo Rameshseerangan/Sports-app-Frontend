@@ -11,6 +11,8 @@ import ResetPassword from './pages/ResetPassword';
 import AdminDashboard from './pages/AdminDashboard';
 import SearchResults from './pages/SearchResults';
 import SportsCareer from './pages/Exports';
+import CreateTournament from "./pages/CreateTournament"
+import TournamentDetails from './pages/TournamentDetails.jsX';
 const App = () => {
   return (
     <Router>
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/search-results" element={<SearchResults />} />
         <Route path="/sports-career" element={<SportsCareer />} />
+        <Route path='/createtornament' element={<CreateTournament/>}/>
+        <Route path='/Tornamentdeatils/:sports_name' element = {<TournamentDetails/>}/>
       </Routes>
     </Router>
   );

@@ -16,11 +16,8 @@ const AdminDashboard = () => {
       { subheading: "Earnings and Growth", content: "" },
     ],
     Ruls: [
-      { subheading: "Warm-Up", content: "" },
-      { subheading: "Technical Skills", content: "" },
-      { subheading: "Tactical Training", content: "" },
-      { subheading: "Physical Conditioning", content: "" },
-      { subheading: "Nutrition Plan", content: "" },
+      { subheading: "International Rules", content: "" },
+      { subheading: "Domestic Rules", content: "" },
     ],
     physical_strength: [
       { subheading: "Fitness Requirements", content: "" },
@@ -32,15 +29,16 @@ const AdminDashboard = () => {
       { subheading: "Common Injuries", content: "" },
     ],
     scholarship_12th: [
-      { subheading: "Achievements", content: "" },
-      { subheading: "Academic Standards", content: "" },
-      { subheading: "Documentation", content: "" },
+      { subheading: "Requirements", content: "" },
+      { subheading: "Infolink", content: "" },
     ],
     scholarship_collage: [
-      { subheading: "Sports Achievements", content: "" },
-      { subheading: "Academic Criteria", content: "" },
-      { subheading: "Selection Process", content: "" },
-      { subheading: "Bonus Points", content: "" },
+      { subheading: "Requirements", content: "" },
+      { subheading: "Infolink", content: "" },
+    ],
+    Achivement_for_Jobs: [
+      { subheading: "Requirements", content: "" },
+      { subheading: "Infolink", content: "" },
     ],
   });
 
@@ -53,7 +51,7 @@ const AdminDashboard = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/upload", // Backend image upload endpoint
+        "https://your-backend-url/api/upload", // Replace with actual backend URL
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -76,8 +74,45 @@ const AdminDashboard = () => {
     }));
   };
 
+  const renderSection = (sectionName, sectionData) => (
+    <div className="mb-6">
+      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">{sectionName}</h2>
+      {sectionData.map((item, index) => (
+        <div key={index} className="mb-4">
+          <input
+            type="text"
+            placeholder={`Subheading - ${item.subheading}`}
+            className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 mb-2"
+            value={item.subheading}
+            onChange={(e) =>
+              handleChange(sectionName, index, "subheading", e.target.value)
+            }
+          />
+          <textarea
+            placeholder="Content"
+            className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
+            value={item.content}
+            onChange={(e) =>
+              handleChange(sectionName, index, "content", e.target.value)
+            }
+          />
+        </div>
+      ))}
+    </div>
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Log payload for debugging
+    console.log("Submitting post:", post);
+
+    // Validate required fields
+    if (!post.sports.trim()) {
+      alert("Sport Name is required");
+      return;
+    }
+
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.post(
@@ -93,29 +128,6 @@ const AdminDashboard = () => {
       alert(error.response?.data?.message || "Failed to create post");
     }
   };
-
-  const renderSection = (sectionName, sectionData) => (
-    <div className="mb-6">
-      <h2 className="text-xl font-bold text-blue-900 mt-6 mb-2">{sectionName}</h2>
-      {sectionData.map((item, index) => (
-        <div key={index} className="mb-4">
-          <input
-            type="text"
-            placeholder={`Subheading - ${item.subheading}`}
-            className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 mb-2"
-            value={item.subheading}
-            onChange={(e) => handleChange(sectionName, index, "subheading", e.target.value)}
-          />
-          <textarea
-            placeholder="Content"
-            className="border p-3 w-full text-lg rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
-            value={item.content}
-            onChange={(e) => handleChange(sectionName, index, "content", e.target.value)}
-          />
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <form
@@ -158,6 +170,7 @@ const AdminDashboard = () => {
       {renderSection("mental_strength", post.mental_strength)}
       {renderSection("scholarship_12th", post.scholarship_12th)}
       {renderSection("scholarship_collage", post.scholarship_collage)}
+      {renderSection("Achivement_for_Jobs", post.Achivement_for_Jobs)}
 
       <button
         type="submit"
