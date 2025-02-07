@@ -13,6 +13,7 @@ import SearchResults from './pages/SearchResults';
 import SportsCareer from './pages/Exports';
 import CreateTournament from "./pages/CreateTournament"
 import TournamentDetails from './pages/TournamentDetails.jsX';
+import Logout from './pages/Logout';
 const App = () => {
   return (
     <Router>
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/sports-career" element={<SportsCareer />} />
         <Route path='/createtornament' element={<CreateTournament/>}/>
         <Route path='/Tornamentdeatils/:sports_name' element = {<TournamentDetails/>}/>
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </Router>
   );

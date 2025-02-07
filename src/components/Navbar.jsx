@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  FaHome,
-  FaInfoCircle,
-  FaEnvelope,
-  FaSignInAlt,
-  FaSignOutAlt,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
+import { FaHome, FaInfoCircle, FaEnvelope, FaSignInAlt, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  // Check login status on page load
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    setIsLoggedIn(!!token); // Convert token to boolean
+    const checkLoginStatus = () => {
+      setIsLoggedIn(!!localStorage.getItem("authToken"));
+    };
+
+    checkLoginStatus();
+    window.addEventListener("storage", checkLoginStatus);
+
+    return () => window.removeEventListener("storage", checkLoginStatus);
   }, []);
 
   const toggleMenu = () => {
@@ -47,11 +44,9 @@ const Navbar = () => {
         </button>
 
         {/* Navigation Links */}
-        <div
-          className={`${
-            isOpen ? "block" : "hidden"
-          } md:flex md:space-x-8 text-lg items-center absolute md:static top-16 left-0 w-full md:w-auto to-green-600 md:bg-transparent shadow-lg md:shadow-none p-4 md:p-0`}
-        >
+        <div className={`${
+          isOpen ? "block" : "hidden"
+        } md:flex md:space-x-8 text-lg items-center absolute md:static top-16 left-0 w-full md:w-auto md:bg-transparent shadow-lg md:shadow-none p-4 md:p-0`}>
           <Link to="/" className="flex font-poppins items-center space-x-2 hover:text-yellow-400 transition duration-200">
             <FaHome />
             <span>Home</span>

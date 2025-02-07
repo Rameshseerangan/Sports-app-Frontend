@@ -12,24 +12,23 @@ const Login = () => {
     try {
       const response = await axios.post('https://sports-app-backend-a5bh.onrender.com/api/auth/login', { email, password });
       const { role, token, message } = response.data;
-
-      // Store token and role for authenticated requests
+  
+      // Store token and role
       localStorage.setItem('authToken', token);
       localStorage.setItem('role', role);
-
-      // Navigate based on role
-      if (role === 'admin') {
-        navigate('/admin'); // Redirect to admin dashboard
-      } else {
-        navigate('/'); // Redirect to home page
-      }
-
+  
+      // Notify other components (like Navbar) to update state
+      window.dispatchEvent(new Event("storage"));
+  
+      // Redirect user
+      navigate(role === 'admin' ? '/admin' : '/');
       alert(message || 'Login successful!');
     } catch (error) {
       console.error('Login error:', error.response?.data || error.message);
       alert(error.response?.data?.message || 'Login failed. Please check your credentials.');
     }
   };
+  
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-500 to-blue-700 font-poppins">
